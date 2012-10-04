@@ -27,11 +27,8 @@
 <body>
 
 <?php
- 
-$urlbase = "http://localhost/RFIDCheckinSystem/API/";
-//$urlbase = "http://theedge.checkinsystem.net/API/";
-//$urlbase = "http://meetmee.javaprovider.net/php/RFIDCheckinSystem/API/"
-//$urlbase = "http://meetmee.javaprovider.net/php/TheEdge_VisitorProfiles/API/";
+ 	//$urlbase = "http://theedge.checkinsystem.net/API/";
+	$urlbase = "http://". $_SERVER['SERVER_NAME'] . substr($_SERVER['PHP_SELF'],0,strlen($_SERVER['PHP_SELF'])-strlen("index.php")) ;
 ?>
 
 <h1>The Edge - Checkin System API (beta)</h1>
@@ -51,6 +48,18 @@ with specific datasets.
 <div class="function_name">view_list_distinctusercheckins_all_2.php</div>
 <div class="function_description">Description: same as "view_list_distinctusercheckins_all.php" but includes user's level of expertise for each expertise keyword</div>
 <a href="<?php echo $urlbase ?>view_list_distinctusercheckins_all_2.php"><?php echo $urlbase ?>view_list_distinctusercheckins_all_2.php</a>
+</p>
+
+<p>
+	<div class="function_name">view_citienzj_list_distinctusercheckins.php</div>
+	<div class="function_description">Description: List of Citizen J Users</div>
+	<div class="function_description"><br/>&nbsp;Params: ?limit=</div>
+	<div class="function_description">&nbsp;&nbsp;&nbsp;&nbsp;eg: ?limit=6</div>
+	<div class="function_description">&nbsp;&nbsp;Define the limit of number of records/users</div>
+	<div class="function_description"><br/>&nbsp;Params: ?location=</div>
+	<div class="function_description">&nbsp;&nbsp;&nbsp;&nbsp;eg: ?location=41</div>
+	<div class="function_description">&nbsp;&nbsp;Define the location ID of users</div><br/>
+	<a href="<?php echo $urlbase ?>view_citienzj_list_distinctusercheckins.php"><?php echo $urlbase ?>view_citienzj_list_distinctusercheckins.php</a>&limit=N?location=LOCATION_ID
 </p>
 
 <p>

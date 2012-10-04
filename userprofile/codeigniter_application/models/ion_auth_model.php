@@ -830,7 +830,7 @@ class Ion_auth_model extends CI_Model
 
 		$this->trigger_events('extra_where');
 
-		$query = $this->db->select($this->identity_column . ', username, email, id, password, active, last_login')
+		$query = $this->db->select($this->identity_column . ', id, username, firstname, lastname, email, password, active, last_login')
 		                  ->where($this->identity_column, $this->db->escape_str($identity))
 		                  ->limit(1)
 		                  ->get($this->tables['users']);
@@ -871,8 +871,8 @@ class Ion_auth_model extends CI_Model
 				}
 
 				$this->trigger_events(array('post_login', 'post_login_successful'));
-				$this->set_message('login_successful');
-
+				$this->set_message('Welcome ' . ucwords($user->firstname. ' ' . $user->lastname) . '!');
+				
 				return TRUE;
 			}
 		}
@@ -883,8 +883,9 @@ class Ion_auth_model extends CI_Model
 		$this->increase_login_attempts($identity);
 		
 		$this->trigger_events('post_login_unsuccessful');
-		$this->set_error('login_unsuccessful');
-
+		//$this->set_error('login_unsuccessful');
+		$this->set_error('Username/Password is not correct');
+		
 		return FALSE;
 	}
 
@@ -1624,7 +1625,8 @@ class Ion_auth_model extends CI_Model
 		$_output = '';
 		foreach ($this->messages as $message)
 		{
-			$messageLang = $this->lang->line($message) ? $this->lang->line($message) : '##' . $message . '##';
+			//$messageLang = $this->lang->line($message) ? $this->lang->line($message) : '##' . $message . '##';
+			$messageLang = $this->lang->line($message) ? $this->lang->line($message) : $message;
 			$_output .= $this->message_start_delimiter . $messageLang . $this->message_end_delimiter;
 		}
 
@@ -1659,7 +1661,8 @@ class Ion_auth_model extends CI_Model
 		$_output = '';
 		foreach ($this->errors as $error)
 		{
-			$errorLang = $this->lang->line($error) ? $this->lang->line($error) : '##' . $error . '##';
+			//$errorLang = $this->lang->line($error) ? $this->lang->line($error) : '##' . $error . '##';
+			$errorLang = $this->lang->line($error) ? $this->lang->line($error) : $error;
 			$_output .= $this->error_start_delimiter . $errorLang . $this->error_end_delimiter;
 		}
 
